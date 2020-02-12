@@ -3,8 +3,13 @@
 # This software is released under AGPLv3. See the included LICENSE.txt for
 # details.
 
+import os
 from flask import Flask
+from flask_talisman import Talisman
 app = Flask(__name__)
+
+if os.getenv('FORCE_SSL', False) == "True":
+    Talisman(app)
 
 import gavel.settings as settings
 app.config['SQLALCHEMY_DATABASE_URI'] = settings.DB_URI
