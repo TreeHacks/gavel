@@ -43,7 +43,7 @@ secret_key: null
 # should NOT include that subpath (in this example it would just be set to
 # 'example.com:1337'). this setting is used for emailed links. if you are
 # setting DISABLE_EMAIL, you can omit this setting or set it to null.
-server_name: treehacks-gavel-dev.herokuapp.com
+server_name: null
 
 # can also be specified as the 'PROXY' environment variable
 # defaults to 'False'
