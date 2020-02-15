@@ -146,3 +146,9 @@ def cast_row(row):
         else:
             row[i] = str(item)
     return row
+
+def get_all_categories(items):
+    categories = [set(item.get_categories()) for item in items]
+    categories = set.union(*categories)
+    categories = sorted(list(categories))
+    return categories

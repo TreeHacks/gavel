@@ -1,23 +1,55 @@
 from gavel import app
 from gavel.models import *
 import gavel.utils as utils
-from flask import Response
+from flask import Response, send_file
+from openpyxl import Workbook
+from io import BytesIO
+from tempfile import NamedTemporaryFile
+
+def _dump_items(items):
+    data = [['Mu', 'Sigma Squared', 'Name', 'Table', 'Floor', 'Categories', 'Description', 'Active']]
+    data += [[
+        str(item.mu),
+        str(item.sigma_sq),
+        item.name,
+        item.location,
+        item.get_floor(),
+        item.categories,
+        item.description,
+        item.active
+    ] for item in items]
+    return data
 
 @app.route('/api/items.csv')
 @app.route('/api/projects.csv')
 @utils.requires_auth
 def item_dump():
     items = Item.query.order_by(desc(Item.mu)).all()
-    data = [['Mu', 'Sigma Squared', 'Name', 'Location', 'Description', 'Active']]
-    data += [[
-        str(item.mu),
-        str(item.sigma_sq),
-        item.name,
-        item.location,
-        item.description,
-        item.active
-    ] for item in items]
+    data = _dump_items(items)
     return Response(utils.data_to_csv_string(data), mimetype='text/csv')
+
+@app.route('/api/items_by_category.xlsx')
+@utils.requires_auth
+def item_dump_by_category():
+    items = Item.query.order_by(desc(Item.mu)).all()
+    categories = utils.get_all_categories(items)
+    wb = Workbook()
+    ws = wb.active
+    for row in _dump_items(items):
+        ws.append(row)
+    for category in categories:
+        ws = wb.create_sheet(category.replace("*","").replace(":","").replace("/","").replace("\\","").replace("?","").replace("[","").replace("]",""))
+        for row in _dump_items([item for item in items if category in item.get_categories()]):
+            ws.append(row)
+    out = BytesIO()
+    wb.save(out)
+    out.seek(0)
+    return send_file(
+        out,
+        mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        attachment_filename='items_by_category.xlsx', as_attachment=True
+    )
+
 
 @app.route('/api/annotators.csv')
 @app.route('/api/judges.csv')

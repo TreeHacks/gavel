@@ -57,9 +57,7 @@ def admin():
     setting_closed = Setting.value_of(SETTING_CLOSED) == SETTING_TRUE
 
     # categories
-    categories = [set(item.get_categories()) for item in items]
-    categories = set.union(*categories)
-    categories = sorted(list(categories))
+    categories = utils.get_all_categories(items)
     return render_template(
         'admin.html',
         annotators=annotators,
