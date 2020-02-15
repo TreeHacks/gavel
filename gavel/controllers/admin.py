@@ -9,11 +9,27 @@ from flask import (
     render_template,
     request,
     url_for,
+    jsonify,
 )
 import urllib.parse
 import xlrd
 
 ALLOWED_EXTENSIONS = set(['csv', 'xlsx', 'xls'])
+
+@app.route('/api/items')
+def items():
+    items = Item.query.order_by(Item.id).all()
+    response = [
+        {
+            "name": item.name,
+            "url": item.url,
+            "categories": [category.strip() for category in (item.categories or "").split(",")],
+            "table": item.location,
+            "floor": item.get_floor()
+        }
+    for item in items]
+    return jsonify(response)
+
 
 @app.route('/admin/')
 @utils.requires_auth

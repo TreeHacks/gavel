@@ -30,6 +30,16 @@ class Item(db.Model):
         self.mu = crowd_bt.MU_PRIOR
         self.sigma_sq = crowd_bt.SIGMA_SQ_PRIOR
 
+    def get_floor(self):
+        try:
+            table = int(self.location)
+        except:
+            return "aa"
+        if table > 100:
+            return "3"
+        else:
+            return "1"
+
     @classmethod
     def by_id(cls, uid):
         if uid is None:
