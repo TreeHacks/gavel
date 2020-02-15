@@ -50,6 +50,8 @@ def admin():
         setting_closed=setting_closed,
     )
 
+DEVPOST_COLUMNS = ("Submission Title","Table Number","Submission Url","Submission Tagline","Submission Created At","Plain Description","Video","Website","File Url","Desired Prizes","Built With","Mlh Points","Mlh Hardware Lab","Mlh Software Lab","Submitter Screen Name","College/Universities Of Team Members","Additional Team Member Count")#,"Team Member 1 Screen Name")
+
 @app.route('/admin/item', methods=['POST'])
 @utils.requires_auth
 def item():
@@ -59,11 +61,12 @@ def item():
         if data:
             # validate data
             for index, row in enumerate(data):
-                if len(row) != 3:
-                    return utils.user_error('Bad data: row %d has %d elements (expecting 3)' % (index + 1, len(row)))
+                if len(row) < len(DEVPOST_COLUMNS):
+                    return utils.user_error('Bad data: row %d has %d elements (expecting %d+)' % (index + 1, len(row), len(DEVPOST_COLUMNS)))
             def tx():
-                for row in data:
-                    _item = Item(*row)
+                for (i, row) in enumerate(data):
+                    if i == 0 and row[0] == DEVPOST_COLUMNS[0]: continue # skip header row
+                    _item = Item(name=row[0], location=row[1], url=row[2], description="", categories=row[9])
                     db.session.add(_item)
                 db.session.commit()
             with_retries(tx)
@@ -132,6 +135,10 @@ def item_patch():
             item.name = request.form['name']
         if 'description' in request.form:
             item.description = request.form['description']
+        if 'url' in request.form:
+            item.url = request.form['url']
+        if 'categories' in request.form:
+            item.categories = request.form['categories']
         db.session.commit()
     with_retries(tx)
     return redirect(url_for('item_detail', item_id=item.id))
