@@ -21,6 +21,10 @@
     <h2>Projects</h2>
   </div>
   <div class="info">
+    <button class="category-btn category-btn-all selected">All</button>
+    {% for category in categories %}
+    <button class="category-btn">{{category}}</button>
+    {% endfor %}
     <table id="items">
       <thead>
         <tr>
@@ -28,6 +32,7 @@
           <th data-sort-method="caseInsensitiveSort">Name</th>
           <th data-sort-method="caseInsensitiveSort">Table</th>
           <th data-sort-method="caseInsensitiveSort">Floor</th>
+          <th data-sort-method="caseInsensitiveSort">Categories</th>
           <th class="sort-default" data-sort-method="number" data-sort-order="desc">Mu</th>
           <th data-sort-method="number">Sigma Squared</th>
           <th data-sort-method="number">Votes</th>
@@ -40,11 +45,14 @@
       </thead>
       <tbody>
         {% for item in items %}
-        <tr class="{{ 'disabled' if not item.active else 'prioritized' if item.prioritized else '' }}">
+        <tr data-categories="{{item.categories | safe }}" class="{{ 'disabled' if not item.active else 'prioritized' if item.prioritized else '' }}">
           <td><a href="{{ url_for('item_detail', item_id=item.id) }}" class="colored">{{ item.id }}</a></td>
           <td><a target="_blank" href="{{ item.url | safe }}">{{ item.name | safe }}</a></td>
           <td>{{ item.location | safe }}</td>
           <td>{{ item.get_floor() | safe }}</td>
+          <td><div style="height: 50px; overflow: auto;">
+            {{ item.categories | safe }}
+          </div></td>
           <td>{{ item.mu | round(4) }}</td>
           <td>{{ item.sigma_sq | round(4) }}</td>
           <td>{{ item_counts.get(item.id, 0) }}</td>
@@ -222,4 +230,10 @@ for (var i = 0; i < tables.length; i++) {
   new Tablesort(tables[i]);
 }
 </script>
+<script src="{{ url_for('static', filename='js/vendor/tablesort.number.js') }}"></script>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 {% endblock %}

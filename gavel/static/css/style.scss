@@ -227,7 +227,7 @@ hr {
   background-color: $vote-color;
 }
 
-input[type=submit] {
+input[type=submit], button {
   color: $light;
   background-color: $dark;
   border: 1px solid $dark;
@@ -315,4 +315,22 @@ input[type=submit].neutral {
     font-size: 0.75rem;
     text-align: center;
   }
+}
+
+.category-btn {
+  // text-overflow: ellipsis;
+  width: 120px;
+  overflow: hidden;
+  height: 50px;
+  color: black;
+  font-size: .6rem;
+  float: left;
+  background-color: $neutral-color;
+  // overflow: auto; 
+}
+
+.category-btn.selected {
+  background-color: $positive-color;
+  overflow: auto;
+  // font-weight: bold;
 }

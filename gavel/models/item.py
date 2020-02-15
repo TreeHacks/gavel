@@ -39,6 +39,9 @@ class Item(db.Model):
             return "3"
         else:
             return "1"
+    
+    def get_categories(self):
+        return [category.strip() for category in (self.categories or "").split(",") if category.strip() != ""]
 
     @classmethod
     def by_id(cls, uid):

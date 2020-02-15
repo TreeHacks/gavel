@@ -23,7 +23,7 @@ def items():
         {
             "name": item.name,
             "url": item.url,
-            "categories": [category.strip() for category in (item.categories or "").split(",")],
+            "categories": item.get_categories(),
             "table": item.location,
             "floor": item.get_floor()
         }
@@ -55,6 +55,11 @@ def admin():
                 skipped[i.id] = skipped.get(i.id, 0) + 1
     # settings
     setting_closed = Setting.value_of(SETTING_CLOSED) == SETTING_TRUE
+
+    # categories
+    categories = [set(item.get_categories()) for item in items]
+    categories = set.union(*categories)
+    categories = sorted(list(categories))
     return render_template(
         'admin.html',
         annotators=annotators,
@@ -64,6 +69,7 @@ def admin():
         items=items,
         votes=len(decisions),
         setting_closed=setting_closed,
+        categories=categories,
     )
 
 DEVPOST_COLUMNS = ("Submission Title","Table Number","Submission Url","Submission Tagline","Submission Created At","Plain Description","Video","Website","File Url","Desired Prizes","Built With","Mlh Points","Mlh Hardware Lab","Mlh Software Lab","Submitter Screen Name","College/Universities Of Team Members","Additional Team Member Count")#,"Team Member 1 Screen Name")
