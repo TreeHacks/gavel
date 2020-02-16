@@ -13,7 +13,7 @@ $(function() {
             if (!categories) {
                 return;
             }
-            categories = categories.split(",").map(e => $.trim(e));
+            categories = categories.split(",").map(e => $.trim(e)).filter(e => e);
             if (selectedCategory === "All" || categories.indexOf(selectedCategory) > -1) {
                 $(this).show();
             } else {
