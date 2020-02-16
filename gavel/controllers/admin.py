@@ -25,7 +25,7 @@ def items():
             "url": item.url,
             "categories": item.get_categories(),
             "table": item.location,
-            "floor": item.get_floor()
+            "floor": item.floor
         }
     for item in items]
     return jsonify(response)
@@ -151,6 +151,8 @@ def item_patch():
             return utils.user_error('Item %s not found ' % request.form['item_id'])
         if 'location' in request.form:
             item.location = request.form['location']
+        if 'floor' in request.form:
+            item.floor = request.form['floor']
         if 'name' in request.form:
             item.name = request.form['name']
         if 'description' in request.form:

@@ -11,6 +11,7 @@ class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.Text, nullable=False)
     location = db.Column(db.Text, nullable=False)
+    floor = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
     url = db.Column(db.Text, nullable=False)
     categories = db.Column(db.Text, nullable=False)
@@ -24,21 +25,22 @@ class Item(db.Model):
     def __init__(self, name, location, url, description, categories):
         self.name = name
         self.location = location
+        self.floor = self.calculate_initial_floor()
         self.url = url
         self.description = description
         self.categories = categories
         self.mu = crowd_bt.MU_PRIOR
         self.sigma_sq = crowd_bt.SIGMA_SQ_PRIOR
 
-    def get_floor(self):
+    def calculate_initial_floor(self):
         try:
             table = int(self.location)
         except:
-            return "aa"
-        if table > 100:
+            return ""
+        if table > 110:
             return "3"
         else:
-            return "1"
+            return "0"
     
     def get_categories(self):
         return [category.strip() for category in (self.categories or "").split(",") if category.strip() != ""]

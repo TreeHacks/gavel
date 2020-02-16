@@ -13,7 +13,7 @@ def _dump_items(items):
         str(item.sigma_sq),
         item.name,
         item.location,
-        item.get_floor(),
+        item.floor,
         item.categories,
         item.description,
         item.active
