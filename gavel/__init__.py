@@ -6,7 +6,10 @@
 import os
 from flask import Flask
 from flask_talisman import Talisman
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)
 
 if os.getenv('FORCE_SSL', False) == "True":
     Talisman(app)
