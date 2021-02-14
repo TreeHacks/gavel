@@ -86,7 +86,7 @@ def item():
             def tx():
                 for (i, row) in enumerate(data):
                     if i == 0 and row[0] == DEVPOST_COLUMNS[0]: continue # skip header row
-                    _item = Item(name=row[0], location=row[1], url=row[2], description="", categories=row[9])
+                    _item = Item(name=row[0], location=row[1], url=row[2], description="", categories=row[10])
                     db.session.add(_item)
                 db.session.commit()
             with_retries(tx)
