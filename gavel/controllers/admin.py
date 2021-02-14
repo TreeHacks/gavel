@@ -70,7 +70,7 @@ def admin():
         categories=categories,
     )
 
-DEVPOST_COLUMNS = ("Project Title","Table Number","Submission Url","Project Created At","About The Project","Video Demo Link","Opt-In Prizes","Built With")#,"Team Member 1 Screen Name")
+DEVPOST_COLUMNS = ("Project Title","Table Number","Submission Url","Project Created At","About The Project","Opt-In Prizes","Built With")#,"Team Member 1 Screen Name")
 
 @app.route('/admin/item', methods=['POST'])
 @utils.requires_auth
