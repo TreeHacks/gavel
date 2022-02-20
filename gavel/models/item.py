@@ -36,12 +36,17 @@ class Item(db.Model):
             table = int(location)
         except:
             return "TBD", "TBD"
+
+        return str(table), "ohyay"
+        """
+        TODO: this is used for in-person treehacks only!
         if table <= 125:
             return str(table), "basement"
         elif table <= 162: # 301-337
             return str(table - 125 + 300), "basement"
         else: # 401-XXX
             return str(table - 162 + 400), "outside"
+        """
     
     def get_categories(self):
         return [category.strip() for category in (self.categories or "").split(",") if category.strip() != ""]
