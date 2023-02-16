@@ -1,6 +1,5 @@
-{% extends "layout.html" %}
-{% block title %}Project{% endblock %}
-{% block content %}
+{% extends "layout.html" %} {% block title %}Project{% endblock %} {% block
+content %}
 <div class="item">
   <div class="banner" id="admin-header">
     <a href="{{ url_for('admin') }}"><h1>Project</h1></a>
@@ -15,10 +14,14 @@
         <th>Name</th>
         <td>
           <form action="{{ url_for('item_patch') }}" method="post">
-            <input type="text" name="name" value="{{ item.name | safe }}">
-            <input type="submit" name="action" value="Update" class="neutral">
-            <input type="hidden" name="item_id" value="{{ item.id }}">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <input type="text" name="name" value="{{ item.name | safe }}" />
+            <input type="submit" name="action" value="Update" class="neutral" />
+            <input type="hidden" name="item_id" value="{{ item.id }}" />
+            <input
+              type="hidden"
+              name="_csrf_token"
+              value="{{ csrf_token() }}"
+            />
           </form>
         </td>
       </tr>
@@ -26,10 +29,18 @@
         <th>Table</th>
         <td>
           <form action="{{ url_for('item_patch') }}" method="post">
-            <input type="text" name="location" value="{{ item.location | safe }}">
-            <input type="submit" name="action" value="Update" class="neutral">
-            <input type="hidden" name="item_id" value="{{ item.id }}">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <input
+              type="text"
+              name="location"
+              value="{{ item.location | safe }}"
+            />
+            <input type="submit" name="action" value="Update" class="neutral" />
+            <input type="hidden" name="item_id" value="{{ item.id }}" />
+            <input
+              type="hidden"
+              name="_csrf_token"
+              value="{{ csrf_token() }}"
+            />
           </form>
         </td>
       </tr>
@@ -37,10 +48,14 @@
         <th>Floor</th>
         <td>
           <form action="{{ url_for('item_patch') }}" method="post">
-            <input type="text" name="floor" value="{{ item.floor | safe }}">
-            <input type="submit" name="action" value="Update" class="neutral">
-            <input type="hidden" name="item_id" value="{{ item.id }}">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <input type="text" name="floor" value="{{ item.floor | safe }}" />
+            <input type="submit" name="action" value="Update" class="neutral" />
+            <input type="hidden" name="item_id" value="{{ item.id }}" />
+            <input
+              type="hidden"
+              name="_csrf_token"
+              value="{{ csrf_token() }}"
+            />
           </form>
         </td>
       </tr>
@@ -48,32 +63,54 @@
         <th>URL</th>
         <td>
           <form action="{{ url_for('item_patch') }}" method="post">
-            <input type="text" name="url" value="{{ item.url | safe }}">
-            <input type="submit" name="action" value="Update" class="neutral">
-            <input type="hidden" name="item_id" value="{{ item.id }}">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <input type="text" name="url" value="{{ item.url | safe }}" />
+            <input type="submit" name="action" value="Update" class="neutral" />
+            <input type="hidden" name="item_id" value="{{ item.id }}" />
+            <input
+              type="hidden"
+              name="_csrf_token"
+              value="{{ csrf_token() }}"
+            />
           </form>
         </td>
       </tr>
       <tr>
-        <th>Categories</th>
+        <th>Prizes</th>
         <td>
           <form action="{{ url_for('item_patch') }}" method="post">
-            <input type="text" name="categories" value="{{ item.categories | safe }}">
-            <input type="submit" name="action" value="Update" class="neutral">
-            <input type="hidden" name="item_id" value="{{ item.id }}">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <input
+              type="text"
+              name="categories"
+              value="{{ item.categories | safe }}"
+            />
+            <input type="submit" name="action" value="Update" class="neutral" />
+            <input type="hidden" name="item_id" value="{{ item.id }}" />
+            <input
+              type="hidden"
+              name="_csrf_token"
+              value="{{ csrf_token() }}"
+            />
           </form>
         </td>
       </tr>
       <tr>
         <th>Description</th>
         <td>
-          <textarea name="description" form="description_form">{{ item.description | safe }}</textarea>
-          <form action="{{ url_for('item_patch') }}" method="post" id="description_form">
-            <input type="submit" name="action" value="Update" class="neutral">
-            <input type="hidden" name="item_id" value="{{ item.id }}">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+          <textarea name="description" form="description_form">
+{{ item.description | safe }}</textarea
+          >
+          <form
+            action="{{ url_for('item_patch') }}"
+            method="post"
+            id="description_form"
+          >
+            <input type="submit" name="action" value="Update" class="neutral" />
+            <input type="hidden" name="item_id" value="{{ item.id }}" />
+            <input
+              type="hidden"
+              name="_csrf_token"
+              value="{{ csrf_token() }}"
+            />
           </form>
         </td>
       </tr>
@@ -90,7 +127,13 @@
         <td>
           <ul>
             {% for annotator in item.viewed %}
-            <li><a href="{{ url_for('annotator_detail', annotator_id=annotator.id) }}" class="colored">{{ annotator.name | safe }} [{{ annotator.id }}]</a></li>
+            <li>
+              <a
+                href="{{ url_for('annotator_detail', annotator_id=annotator.id) }}"
+                class="colored"
+                >{{ annotator.name | safe }} [{{ annotator.id }}]</a
+              >
+            </li>
             {% endfor %}
           </ul>
         </td>
@@ -100,7 +143,13 @@
         <td>
           <ul>
             {% for annotator in assigned %}
-            <li><a href="{{ url_for('annotator_detail', annotator_id=annotator.id) }}" class="colored">{{ annotator.name | safe }} [{{ annotator.id }}]</a></li>
+            <li>
+              <a
+                href="{{ url_for('annotator_detail', annotator_id=annotator.id) }}"
+                class="colored"
+                >{{ annotator.name | safe }} [{{ annotator.id }}]</a
+              >
+            </li>
             {% endfor %}
           </ul>
         </td>
@@ -110,7 +159,13 @@
         <td>
           <ul>
             {% for annotator in skipped %}
-            <li><a href="{{ url_for('annotator_detail', annotator_id=annotator.id) }}" class="colored">{{ annotator.name | safe }} [{{ annotator.id }}]</a></li>
+            <li>
+              <a
+                href="{{ url_for('annotator_detail', annotator_id=annotator.id) }}"
+                class="colored"
+                >{{ annotator.name | safe }} [{{ annotator.id }}]</a
+              >
+            </li>
             {% endfor %}
           </ul>
         </td>

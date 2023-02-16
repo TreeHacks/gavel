@@ -7,7 +7,7 @@ from io import BytesIO
 from tempfile import NamedTemporaryFile
 
 def _dump_items(items):
-    data = [['Mu', 'Sigma Squared', 'Name', 'Table', 'Floor', 'Categories', 'Description', 'Active']]
+    data = [['Mu', 'Sigma Squared', 'Name', 'Table', 'Floor', 'Prizes', 'Description', 'Active']]
     data += [[
         str(item.mu),
         str(item.sigma_sq),
