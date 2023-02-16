@@ -14,7 +14,7 @@ SETTING_FALSE = 'false'
 # Defaults
 # these can be overridden via the config file
 DEFAULT_WELCOME_MESSAGE = '''
-Welcome to Gavel.
+Welcome to TreeHacks Gavel 2023.
 
 **Please read this important message carefully before continuing.**
 
@@ -24,11 +24,15 @@ and collects your votes.
 The system is based on the model of pairwise comparison. You'll start off by
 looking at a single submission, and then for every submission after that,
 you'll decide whether it's better or worse than the one you looked at
-**immediately beforehand**.
+**immediately beforehand**. So your judging will be comparison based and our backend algorithm will take care of the rest to rank all the top projects.
 
 If at any point, you can't find a particular submission, you can click the
 'Skip' button and you will be assigned a new project. **Please don't skip
 unless absolutely necessary.**
+
+If you have any questions at any point about the judging, such as what to evaluate on, what questions to ask projects, where to go, where/how to find a project, please reach out to us on slack.
+
+Below is a link to view maps and floor layouts of Huang, which is where the projects will be scattered: https://live.treehacks.com/maps.
 
 Gavel makes it really simple for you to submit votes, but please think hard
 before you vote. **Once you make a decision, you can't take it back**.
