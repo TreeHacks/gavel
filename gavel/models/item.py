@@ -36,8 +36,8 @@ class Item(db.Model):
             table = int(location)
         except:
             return "TBD", "TBD"
-        if table <= 150:
-            return str(table), "basement - Huang"
+        if table <= 174:
+            return str(table), "Basement - Huang"
         else:
             return str(table), "3rd floor - Huang"
         
