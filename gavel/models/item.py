@@ -36,14 +36,11 @@ class Item(db.Model):
             table = int(location)
         except:
             return "TBD", "TBD"
-        if table <= 100:
-            return str(table), "basement"
-        elif table <= 180: # 301-337
-            return str(table), "1st floor Huang"
-        elif table <= 270: # 301-337
-            return str(table), "2nd floor Huang"
-        elif table <= 350: # 301-337
-            return str(table), "3rd floor Huang"
+        if table <= 150:
+            return str(table), "basement - Huang"
+        else:
+            return str(table), "3rd floor - Huang"
+        
     
     def get_categories(self):
         return [category.strip() for category in (self.categories or "").split(",") if category.strip() != ""]
