@@ -24,23 +24,13 @@ class Item(db.Model):
 
     def __init__(self, name, location, url, description, categories):
         self.name = name
-        self.location, self.floor = self.calculate_initial_floor(location)
+        self.location = str(int(self.location))
+        self.floor = "1st Floor, Outside Hallways"
         self.url = url
         self.description = description
         self.categories = categories
         self.mu = crowd_bt.MU_PRIOR
         self.sigma_sq = crowd_bt.SIGMA_SQ_PRIOR
-
-    def calculate_initial_floor(self, location):
-        try:
-            table = int(location)
-        except:
-            return "TBD", "TBD"
-        if table <= 174:
-            return str(table), "Basement - Huang"
-        else:
-            return str(table), "3rd floor - Huang"
-        
     
     def get_categories(self):
         return [category.strip() for category in (self.categories or "").split(",") if category.strip() != ""]

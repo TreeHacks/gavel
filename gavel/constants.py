@@ -14,7 +14,7 @@ SETTING_FALSE = 'false'
 # Defaults
 # these can be overridden via the config file
 DEFAULT_WELCOME_MESSAGE = '''
-Welcome to TreeHacks Gavel 2023.
+Welcome to TreeHacks Gavel 2024.
 
 **Please read this important message carefully before continuing.**
 
