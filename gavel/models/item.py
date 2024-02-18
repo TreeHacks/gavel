@@ -24,8 +24,7 @@ class Item(db.Model):
 
     def __init__(self, name, location, url, description, categories):
         self.name = name
-        self.location = str(int(self.location))
-        self.floor = "1st Floor, Outside Hallways"
+        self.location, self.floor = self.calculate_initial_floor(location)
         self.url = url
         self.description = description
         self.categories = categories
@@ -33,16 +32,12 @@ class Item(db.Model):
         self.sigma_sq = crowd_bt.SIGMA_SQ_PRIOR
 
     def calculate_initial_floor(self, location):
-        try:
-            table = int(location)
-        except:
-            return "TBD", "TBD"
         if table <= 125:
-            return str(table), "basement"
+            return str(table), "1st Floor, Outside Hallways"
         elif table <= 162: # 301-337
-            return str(table - 125 + 300), "basement"
+            return str(table - 125 + 300), "1st Floor, Outside Hallways"
         else: # 401-XXX
-            return str(table - 162 + 400), "outside"
+            return str(table - 162 + 400), "1st Floor, Outside Hallways"
     
     def get_categories(self):
         return [category.strip() for category in (self.categories or "").split(",") if category.strip() != ""]
