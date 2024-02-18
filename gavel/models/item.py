@@ -37,9 +37,9 @@ class Item(db.Model):
         except:
             return "TBD", "TBD"
         if table <= 174:
-            return str(table), "Basement - Huang"
+            return str(table), "1st Floor, Outside Hallways"
         else:
-            return str(table), "3rd floor - Huang"
+            return str(table), "1st Floor, Outside Hallways"
         
     
     def get_categories(self):
