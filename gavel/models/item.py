@@ -32,12 +32,15 @@ class Item(db.Model):
         self.sigma_sq = crowd_bt.SIGMA_SQ_PRIOR
 
     def calculate_initial_floor(self, location):
-        if table <= 125:
-            return str(table), "1st Floor, Outside Hallways"
-        elif table <= 162: # 301-337
-            return str(table - 125 + 300), "1st Floor, Outside Hallways"
-        else: # 401-XXX
-            return str(table - 162 + 400), "1st Floor, Outside Hallways"
+        try:
+            table = int(location)
+        except:
+            return "TBD", "TBD"
+        if table <= 174:
+            return str(table), "Basement - Huang"
+        else:
+            return str(table), "3rd floor - Huang"
+        
     
     def get_categories(self):
         return [category.strip() for category in (self.categories or "").split(",") if category.strip() != ""]
