@@ -24,7 +24,8 @@ class Item(db.Model):
 
     def __init__(self, name, location, url, description, categories):
         self.name = name
-        self.location, self.floor = self.calculate_initial_floor(location)
+        self.location = str(int(self.location))
+        self.floor = "1st Floor, Outside Hallways"
         self.url = url
         self.description = description
         self.categories = categories

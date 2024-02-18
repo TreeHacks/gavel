@@ -163,7 +163,7 @@ email_cc: null
 # defaults to gavel.constants.DEFAULT_EMAIL_SUBJECT
 #
 # this is the subject line of the email that's sent to judges.
-email_subject: TreeHacks 2022 - Welcome to Gavel!
+email_subject: TreeHacks 2024 - Welcome to Gavel!
 
 # can't be specified via environment variable
 # defaults to gavel.constants.DEFAULT_EMAIL_BODY
@@ -177,7 +177,7 @@ email_subject: TreeHacks 2022 - Welcome to Gavel!
 email_body: "Hello,
 
 
-Welcome to Gavel, the online expo judging system for TreeHacks 2022. This email contains your
+Welcome to Gavel, the online expo judging system for TreeHacks 2024. This email contains your
 magic link to the judging system.
 
 
